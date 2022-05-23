@@ -110,7 +110,7 @@ type Query {
   fetchBoard(boardId: String!): Board!
   fetchBoardsCount(UserId: String): Int!
   fetchBoardImages: [BoardImage!]!
-  fetchBoardImage(board: String!): [BoardImage!]!
+  fetchBoardImage(boardId: String!): [BoardImage!]!
   fetchUsers: [User!]!
   fetchUser: User!
   fetchUserId(userId: String!): User!
