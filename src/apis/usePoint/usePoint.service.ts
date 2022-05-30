@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../user/entities/user.entity';
@@ -12,14 +12,17 @@ export class UsePointService {
 
   async use({ currentUser }) {
     const user = await this.userRepository.findOne({
-      email: currentUser.email,
+      where: { email: currentUser.email },
     });
 
     if (user.points < 20) {
-      return "You don't have enough point to enter the chat room";
+      throw new UnprocessableEntityException(
+        "You don't have enough point to enter the chat room",
+      );
     }
 
-    return this.userRepository.save({
+    return await this.userRepository.save({
+      ...user,
       where: { email: currentUser.email },
       points: user.points - 20,
     });

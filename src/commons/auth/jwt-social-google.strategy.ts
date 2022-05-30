@@ -29,7 +29,7 @@ export class JwtGoogleStrategy extends PassportStrategy(Strategy, 'google') {
       email: profile.emails[0].value,
       password: '0000',
       name: profile.displayName, //req.user라는 이름에  contest 로 들어감
-      myLang: 'Korean',
+      myLang: '한국어',
       newLang: 'English',
       image: profile.photos[0].value,
       provider: profile.provider,
