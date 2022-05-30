@@ -21,7 +21,10 @@ export class LikeCommunityBoardService {
   async findAll({ currentUser, boardId }) {
     if (boardId) {
       return await this.likeCommunityBoardRepository.find({
-        where: { user: currentUser.id, communityBoard: { id: boardId } },
+        where: {
+          user: { id: currentUser.id },
+          communityBoard: { id: boardId },
+        },
         relations: ['user', 'communityBoard'],
       });
     }
