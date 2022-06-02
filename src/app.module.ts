@@ -40,7 +40,11 @@ import { UsePointModule } from './apis/usePoint/usePoint.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       cors: {
-        origin: 'http://localhost:3000',
+        origin: [
+          'http://langb.shop',
+          'https://langb.shop',
+          'http://localhost:3000',
+        ],
         credentials: true,
       },
       autoSchemaFile: 'src/commons/graphql/schema.gql',
