@@ -124,7 +124,7 @@ type Query {
   searchBoardContent(content: String!, page: Float, pageSize: Float): [Board!]!
   fetchReceipts: [Receipt!]!
   fetchMyReceipts: [Receipt!]!
-  fetchLikedCommunityBoard(boardId: String): [LikeCommunityBoard!]!
+  fetchLikedCommunityBoard(userId: String, boardId: String): [LikeCommunityBoard!]!
   fetchLikedComment(userId: String): [LikeComment!]!
 }
 
@@ -160,6 +160,7 @@ type Mutation {
   deleteReceipt(impUid: String!, price: Float!): Receipt!
   likeCommunityBoard(communityBoardId: String!): String!
   likeComment(commentId: String!): String!
+  usePoint: User!
 }
 
 input CreateBoardInput {
