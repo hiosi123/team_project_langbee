@@ -7,7 +7,7 @@ import { CommentService } from './comment.service';
 import { CreateCommentInput } from './dto/createComment.input';
 import { UpdateCommentInput } from './dto/updateComment.input';
 import { Comment } from './entities/comment.entity';
-
+//변경 내용 테스트
 @Resolver()
 export class CommentResolver {
   constructor(private readonly commentService: CommentService) {}
