@@ -6,7 +6,7 @@ import { User } from '../user/entities/user.entity';
 import { BoardResolver } from './board.resolver';
 import { BoardService } from './board.service';
 import { Board } from './entities/board.entity';
-
+//테스트
 @Module({
   imports: [TypeOrmModule.forFeature([Board, User, Comment])],
   providers: [BoardResolver, BoardService],
