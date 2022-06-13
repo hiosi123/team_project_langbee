@@ -25,7 +25,7 @@ export class AuthService {
     // // 배포환경;
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Origin', 'http://langb.shop');
-    // res.setHeader('Access-Control-Allow-Origin', 'https://langbee.shop');
+    res.setHeader('Access-Control-Allow-Origin', 'https://langbee.shop');
     // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader(
       'Set-Cookie',
@@ -62,6 +62,6 @@ export class AuthService {
     //3. 로그인
     this.setRefreshToken({ user, res });
     // 여기로 온다
-    res.redirect('http://langb.shop');
+    res.redirect('https://langb.shop/garden');
   }
 }

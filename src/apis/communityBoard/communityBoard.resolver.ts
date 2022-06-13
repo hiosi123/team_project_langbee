@@ -56,17 +56,23 @@ export class CommunityBoardResolver {
     @Args('communityBoardId') communityBoardId: string,
     @Args('updateCommunityBoardInput')
     updateCommunityBoardInput: UpdateCommunityBoardInput,
+    @CurrentUser() currentUser: ICurrentUser,
   ) {
     return await this.communityBoardService.update({
       communityBoardId,
       updateCommunityBoardInput,
+      currentUser,
     });
   }
 
   @Mutation(() => Boolean)
   async deleteCommunityBoard(
     @Args('communityBoardId') communityBoardId: string,
+    @CurrentUser() currentUser: ICurrentUser,
   ) {
-    return await this.communityBoardService.delete({ communityBoardId });
+    return await this.communityBoardService.delete({
+      currentUser,
+      communityBoardId,
+    });
   }
 }

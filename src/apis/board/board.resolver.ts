@@ -65,13 +65,21 @@ export class BoardResolver {
   async updateBoard(
     @Args('boardId') boardId: string,
     @Args('updateBoardInput') updateBoardInput: UpdateBoardInput,
+    @CurrentUser() currentUser: ICurrentUser,
   ) {
-    return await this.boardService.update({ boardId, updateBoardInput });
+    return await this.boardService.update({
+      currentUser,
+      boardId,
+      updateBoardInput,
+    });
   }
 
   @UseGuards(GqlAuthAccessGuard)
   @Mutation(() => Boolean)
-  async deleteBoard(@Args('boardId') boardId: string) {
-    return await this.boardService.delete({ boardId });
+  async deleteBoard(
+    @Args('boardId') boardId: string, //
+    @CurrentUser() currentUser: ICurrentUser,
+  ) {
+    return await this.boardService.delete({ currentUser, boardId });
   }
 }

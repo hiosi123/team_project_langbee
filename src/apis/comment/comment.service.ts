@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { resourceLimits } from 'worker_threads';
@@ -75,20 +75,27 @@ export class CommentService {
     });
   }
 
-  async update({ updateCommentInput, commentId }) {
+  async update({ currentUser, updateCommentInput, commentId }) {
     const oldComment = await this.commentRepository.findOne({
       where: { id: commentId },
     });
+    if (oldComment.writer.id !== currentUser.id) {
+      throw new UnauthorizedException('수정 권한이 없습니다.');
+    }
+
     const newComment = { ...oldComment, ...updateCommentInput };
 
     return await this.commentRepository.save(newComment);
   }
 
-  async delete({ commentId }) {
+  async delete({ currentUser, commentId }) {
     const findBoardFromComment = await this.commentRepository.findOne({
       where: { id: commentId },
       relations: ['board'],
     });
+    if (findBoardFromComment.writer.id !== currentUser.id) {
+      throw new UnauthorizedException('삭제 권한이 없습니다.');
+    }
 
     await this.boardRepository.update(
       {
