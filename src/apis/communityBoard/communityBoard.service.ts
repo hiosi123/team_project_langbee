@@ -111,6 +111,7 @@ export class CommunityBoardService {
   async update({ currentUser, communityBoardId, updateCommunityBoardInput }) {
     const oldBoard = await this.communityBoardRepository.findOne({
       where: { id: communityBoardId },
+      relations: ['writer'],
     });
     if (oldBoard.writer.id !== currentUser.id) {
       throw new UnauthorizedException('수정 권한이 없습니다.');
@@ -122,9 +123,12 @@ export class CommunityBoardService {
 
   async delete({ currentUser, communityBoardId }) {
     const findUserFromBoard = await this.communityBoardRepository.findOne({
-      where: { id: communityBoardId },
+      where: {
+        id: communityBoardId,
+      },
       relations: ['writer'],
     });
+
     if (findUserFromBoard.writer.id !== currentUser.id) {
       throw new UnauthorizedException('삭제 권한이 없습니다.');
     }

@@ -25,8 +25,8 @@ export class AuthService {
     // // 배포환경;
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     res.setHeader('Access-Control-Allow-Origin', 'http://langb.shop');
-    res.setHeader('Access-Control-Allow-Origin', 'https://langbee.shop');
-    // res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+    res.setHeader('Access-Control-Allow-Origin', 'https://langb.shop');
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
     res.setHeader(
       'Set-Cookie',
       `refreshToken=${refreshToken}; path=/; domain=.langbee.shop; SameSite=None; Secure; httpOnly;`,

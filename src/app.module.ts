@@ -41,9 +41,9 @@ import { UsePointModule } from './apis/usePoint/usePoint.module';
       driver: ApolloDriver,
       cors: {
         origin: [
-          'http://langb.shop',
           'https://langb.shop',
           'http://localhost:3000',
+          'http://langb.shop',
         ],
         credentials: true,
       },

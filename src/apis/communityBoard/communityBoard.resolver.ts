@@ -42,7 +42,7 @@ export class CommunityBoardResolver {
   @Mutation(() => CommunityBoard)
   createCommunityBoard(
     @Args('createCommunityBoardInput')
-    createCommunityBoardInput: CreateCommunityBoardInput,
+    createCommunityBoardInput: CreateCommunityBoardInput, //
     @CurrentUser() currentUser: ICurrentUser,
   ) {
     return this.communityBoardService.create({
@@ -51,6 +51,7 @@ export class CommunityBoardResolver {
     });
   }
 
+  @UseGuards(GqlAuthAccessGuard)
   @Mutation(() => CommunityBoard)
   async updateCommunityBoard(
     @Args('communityBoardId') communityBoardId: string,
@@ -65,6 +66,7 @@ export class CommunityBoardResolver {
     });
   }
 
+  @UseGuards(GqlAuthAccessGuard)
   @Mutation(() => Boolean)
   async deleteCommunityBoard(
     @Args('communityBoardId') communityBoardId: string,
